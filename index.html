@@ -1,554 +1,561 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forum Innovazione 2026 — Programma</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<title>Stappa 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root {
-    --cream: #f6f1e9;
-    --ink: #1c1710;
-    --gold: #b8923a;
-    --warm: #7a5c35;
-    --muted: rgba(28,23,16,.5);
-    --line: rgba(184,146,58,.25);
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Cormorant Garamond', serif;
-    min-height: 100vh;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes slideIn {
-    from { opacity: 0; transform: translateX(-16px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes drawLine {
-    from { transform: scaleX(0); }
-    to   { transform: scaleX(1); }
+    --bg:      #0f1b0e;
+    --surface: #162114;
+    --green:   #4a8c3f;
+    --sage:    #7eb572;
+    --gold:    #d4a843;
+    --cream:   #f5efe0;
+    --muted:   rgba(245,239,224,.5);
+    --line:    rgba(212,168,67,.2);
   }
 
-/* HERO */
+- { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+body {
+background: var(–bg);
+color: var(–cream);
+font-family: ‘Jost’, sans-serif;
+font-weight: 300;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::after {
+content: ‘’;
+position: fixed;
+inset: 0;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.035’/%3E%3C/svg%3E”);
+pointer-events: none;
+z-index: 999;
+}
+
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(20px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+from { opacity: 0; }
+to   { opacity: 1; }
+}
+@keyframes grow {
+from { transform: scaleX(0); }
+to   { transform: scaleX(1); }
+}
+
+/* ── HERO ── */
 .hero {
-position: relative;
-padding: 72px 40px 56px;
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
 text-align: center;
+padding: 60px 24px;
+position: relative;
 overflow: hidden;
 }
-.hero::after {
-content: ‘’;
-display: block;
-height: 1px;
-background: linear-gradient(90deg, transparent 0%, var(–gold) 30%, var(–gold) 70%, transparent 100%);
-margin-top: 56px;
-transform-origin: left;
-animation: drawLine 1.2s ease forwards .4s;
-transform: scaleX(0);
-}
-.hero-bg {
+
+.hero-glow {
 position: absolute;
-inset: 0;
-background:
-radial-gradient(ellipse 70% 50% at 50% -5%, rgba(184,146,58,.12) 0%, transparent 65%),
-repeating-linear-gradient(0deg, transparent 0px, transparent 47px, rgba(184,146,58,.06) 48px),
-repeating-linear-gradient(90deg, transparent 0px, transparent 47px, rgba(184,146,58,.04) 48px);
+width: 600px; height: 600px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(74,140,63,.18) 0%, transparent 70%);
+top: 50%; left: 50%;
+transform: translate(-50%, -50%);
 pointer-events: none;
 }
-.pre-title {
-font-family: ‘DM Mono’, monospace;
+
+.hero-glow-gold {
+position: absolute;
+width: 800px; height: 300px;
+border-radius: 50%;
+background: radial-gradient(ellipse, rgba(212,168,67,.07) 0%, transparent 70%);
+bottom: 0; left: 50%;
+transform: translateX(-50%);
+pointer-events: none;
+}
+
+.pre-label {
 font-size: .68rem;
+font-weight: 500;
 letter-spacing: .45em;
-color: var(–gold);
 text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 28px;
 opacity: 0;
 animation: fadeUp .7s ease forwards .1s;
 }
-h1 {
-font-size: clamp(3rem, 9vw, 6rem);
-font-weight: 300;
-line-height: 1.02;
-letter-spacing: -.02em;
-margin: 14px 0 6px;
-opacity: 0;
-animation: fadeUp .8s ease forwards .3s;
-}
-h1 em { font-style: italic; color: var(–warm); }
-.hero-sub {
-font-size: 1.15rem;
-font-weight: 300;
-font-style: italic;
-color: var(–muted);
-margin: 8px 0 28px;
-opacity: 0;
-animation: fadeUp .8s ease forwards .45s;
-}
-.hero-details {
-display: flex;
-justify-content: center;
-gap: 40px;
-flex-wrap: wrap;
-opacity: 0;
-animation: fadeUp .8s ease forwards .6s;
-}
-.detail-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.detail-label {
-font-family: ‘DM Mono’, monospace;
-font-size: .58rem;
-letter-spacing: .35em;
-text-transform: uppercase;
-color: var(–gold);
-}
-.detail-value { font-size: 1rem; font-weight: 400; }
 
-/* LAYOUT */
-.container { max-width: 820px; margin: 0 auto; padding: 0 28px 100px; }
-.section-label {
-font-family: ‘DM Mono’, monospace;
+.hero-title {
+font-family: ‘Playfair Display’, serif;
+font-size: clamp(5rem, 22vw, 11rem);
+font-weight: 700;
+line-height: .95;
+letter-spacing: -.02em;
+color: var(–cream);
+opacity: 0;
+animation: fadeUp .8s ease forwards .25s;
+}
+
+.hero-title span {
+display: block;
+font-style: italic;
+color: var(–sage);
+}
+
+.hero-divider {
+width: 60px;
+height: 1px;
+background: var(–gold);
+margin: 32px auto;
+transform-origin: left;
+transform: scaleX(0);
+animation: grow .8s ease forwards .5s;
+}
+
+.hero-dates {
+font-size: 1.1rem;
+font-weight: 400;
+letter-spacing: .18em;
+text-transform: uppercase;
+color: var(–cream);
+opacity: 0;
+animation: fadeUp .7s ease forwards .6s;
+}
+
+.hero-tagline {
+margin-top: 10px;
+font-size: .9rem;
+font-weight: 300;
+color: var(–muted);
+letter-spacing: .1em;
+opacity: 0;
+animation: fadeUp .7s ease forwards .75s;
+}
+
+.scroll-hint {
+position: absolute;
+bottom: 32px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 8px;
+opacity: 0;
+animation: fadeIn 1s ease forwards 1.2s;
+}
+.scroll-hint span {
+font-size: .6rem;
+letter-spacing: .3em;
+text-transform: uppercase;
+color: var(–muted);
+}
+.scroll-line {
+width: 1px;
+height: 40px;
+background: linear-gradient(to bottom, var(–gold), transparent);
+animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+0%, 100% { opacity: .4; transform: scaleY(1); }
+50%       { opacity: 1;  transform: scaleY(1.15); }
+}
+
+/* ── CONTENT ── */
+.container { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+
+.block {
+padding-top: 80px;
+opacity: 0;
+transform: translateY(24px);
+animation: fadeUp .7s ease forwards;
+}
+.block:nth-child(1) { animation-delay: .1s }
+.block:nth-child(2) { animation-delay: .25s }
+.block:nth-child(3) { animation-delay: .4s }
+.block:nth-child(4) { animation-delay: .55s }
+
+.block-label {
 font-size: .62rem;
-letter-spacing: .35em;
+font-weight: 500;
+letter-spacing: .4em;
 text-transform: uppercase;
 color: var(–gold);
-margin: 60px 0 24px;
+margin-bottom: 28px;
 display: flex;
 align-items: center;
 gap: 14px;
 }
-.section-label::after {
+.block-label::after {
 content: ‘’;
 flex: 1;
 height: 1px;
-background: linear-gradient(90deg, var(–gold) 0%, transparent 100%);
-opacity: .6;
+background: var(–line);
 }
 
-/* PROGRAMME */
-.programme { display: flex; flex-direction: column; }
-.slot {
-display: grid;
-grid-template-columns: 80px 18px 1fr;
-gap: 0 16px;
-padding: 22px 0;
-border-bottom: 1px solid var(–line);
-opacity: 0;
-transform: translateX(-14px);
-animation: slideIn .55s ease forwards;
-}
-.slot:nth-child(1) { animation-delay: .6s }
-.slot:nth-child(2) { animation-delay: .72s }
-.slot:nth-child(3) { animation-delay: .84s }
-.slot:nth-child(4) { animation-delay: .96s }
-.slot:nth-child(5) { animation-delay: 1.08s }
-.slot:nth-child(6) { animation-delay: 1.2s }
-.slot:nth-child(7) { animation-delay: 1.32s }
-.slot:nth-child(8) { animation-delay: 1.44s }
-.slot-time {
-font-family: ‘DM Mono’, monospace;
-font-size: .75rem;
-color: var(–gold);
-padding-top: 5px;
-text-align: right;
-white-space: nowrap;
-}
-.slot-dot { display: flex; flex-direction: column; align-items: center; padding-top: 8px; }
-.dot { width: 7px; height: 7px; border-radius: 50%; background: var(–gold); flex-shrink: 0; }
-.dot-line { width: 1px; flex: 1; background: var(–line); margin-top: 4px; min-height: 30px; }
-.slot:last-child .dot-line { display: none; }
-.slot-title { font-size: 1.3rem; font-weight: 400; line-height: 1.2; margin-bottom: 5px; }
-.slot-title em { font-style: italic; color: var(–warm); }
-.slot-speaker {
-font-family: ‘DM Mono’, monospace;
-font-size: .68rem;
-letter-spacing: .06em;
-color: var(–warm);
-margin-bottom: 7px;
-}
-.slot-desc { font-size: .95rem; font-style: italic; color: var(–muted); line-height: 1.55; }
-.tag {
-display: inline-block;
-font-family: ‘DM Mono’, monospace;
-font-size: .58rem;
-letter-spacing: .1em;
-text-transform: uppercase;
-padding: 2px 8px;
-border: 1px solid var(–gold);
-color: var(–gold);
-border-radius: 2px;
-margin-top: 8px;
-}
-.tag.break { border-color: var(–muted); color: var(–muted); }
+/* ── SERATE ── */
+.nights { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+@media (max-width: 520px) { .nights { grid-template-columns: 1fr; } }
 
-/* SPEAKERS */
-.speakers-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-gap: 20px;
-margin-top: 4px;
-}
-.speaker-card {
-border: 1px solid var(–line);
-padding: 20px;
+.night {
+background: var(–surface);
+padding: 32px 28px;
 position: relative;
-transition: border-color .25s;
-opacity: 0;
-animation: fadeUp .6s ease forwards;
+overflow: hidden;
+transition: background .25s;
 }
-.speaker-card:nth-child(1) { animation-delay: .5s }
-.speaker-card:nth-child(2) { animation-delay: .65s }
-.speaker-card:nth-child(3) { animation-delay: .8s }
-.speaker-card:nth-child(4) { animation-delay: .95s }
-.speaker-card::before {
+.night:first-child { border-radius: 16px 0 0 16px; }
+.night:last-child  { border-radius: 0 16px 16px 0; }
+@media (max-width: 520px) {
+.night:first-child { border-radius: 16px 16px 0 0; }
+.night:last-child  { border-radius: 0 0 16px 16px; }
+}
+
+.night::before {
 content: ‘’;
 position: absolute;
-top: -1px; left: -1px;
-width: 0; height: 2px;
-background: var(–gold);
-transition: width .3s ease;
-}
-.speaker-card:hover { border-color: var(–gold); }
-.speaker-card:hover::before { width: 40%; }
-.speaker-initial {
-width: 44px; height: 44px;
-border: 1px solid var(–gold);
-border-radius: 50%;
-display: flex; align-items: center; justify-content: center;
-font-size: 1.1rem; font-weight: 600; color: var(–gold);
-margin-bottom: 12px; font-style: italic;
-}
-.speaker-name { font-size: 1.05rem; font-weight: 400; margin-bottom: 3px; }
-.speaker-role {
-font-family: ‘DM Mono’, monospace;
-font-size: .65rem;
-letter-spacing: .06em;
-color: var(–warm);
-line-height: 1.4;
-}
-
-/* VENUE */
-.venue-block {
-border: 1px solid var(–line);
-padding: 28px 32px;
-margin-top: 4px;
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 24px;
+top: 0; left: 0; right: 0;
+height: 2px;
+background: linear-gradient(90deg, var(–green), var(–gold));
 opacity: 0;
-animation: fadeUp .7s ease forwards .5s;
+transition: opacity .3s;
 }
-.venue-item-label {
-font-family: ‘DM Mono’, monospace;
-font-size: .6rem;
+.night:hover { background: #1d2e1b; }
+.night:hover::before { opacity: 1; }
+
+.night-day {
+font-size: .65rem;
+font-weight: 500;
 letter-spacing: .3em;
 text-transform: uppercase;
 color: var(–gold);
-margin-bottom: 6px;
+margin-bottom: 12px;
 }
-.venue-item-value { font-size: 1.05rem; line-height: 1.45; }
 
-/* QR */
-.qr-section {
-border: 1px solid var(–gold);
-padding: 36px 32px;
-margin-top: 4px;
-text-align: center;
-background: linear-gradient(135deg, rgba(184,146,58,.04) 0%, transparent 60%);
-opacity: 0;
-animation: fadeUp .7s ease forwards .4s;
+.night-artist {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.8rem;
+font-weight: 400;
+line-height: 1.1;
+color: var(–cream);
+margin-bottom: 16px;
 }
-.qr-title {
-font-family: ‘DM Mono’, monospace;
+
+.night-badge {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+border: 1px solid var(–line);
+border-radius: 999px;
+padding: 4px 12px;
 font-size: .65rem;
-letter-spacing: .35em;
+font-weight: 500;
+letter-spacing: .1em;
 text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 6px;
+color: var(–sage);
 }
-.qr-subtitle { font-size: 1.05rem; font-style: italic; color: var(–muted); margin-bottom: 28px; }
-.qr-input-row {
+
+/* ── MENU ── */
+.menu-category { margin-bottom: 36px; }
+.menu-category:last-child { margin-bottom: 0; }
+
+.category-name {
+font-size: .62rem;
+font-weight: 500;
+letter-spacing: .3em;
+text-transform: uppercase;
+color: var(–sage);
+margin-bottom: 12px;
+padding-bottom: 8px;
+border-bottom: 1px solid var(–line);
+}
+
+.menu-list { display: flex; flex-direction: column; gap: 1px; }
+
+.menu-row {
 display: flex;
-gap: 10px;
-max-width: 520px;
+align-items: center;
+gap: 16px;
+padding: 14px 20px;
+background: var(–surface);
+transition: background .2s, padding-left .2s;
+cursor: default;
+}
+.menu-row:first-child { border-radius: 12px 12px 0 0; }
+.menu-row:last-child  { border-radius: 0 0 12px 12px; }
+.menu-row:only-child  { border-radius: 12px; }
+.menu-row:hover { background: #1d2e1b; padding-left: 24px; }
+
+.menu-dot {
+width: 5px; height: 5px;
+border-radius: 50%;
+background: var(–gold);
+flex-shrink: 0;
+opacity: .6;
+}
+.menu-dot.sage  { background: var(–sage); }
+.menu-dot.green { background: var(–green); }
+
+.menu-name {
+font-size: 1rem;
+font-weight: 400;
+color: var(–cream);
+letter-spacing: .02em;
+}
+
+/* ── QR ── */
+.qr-wrap {
+background: var(–surface);
+border: 1px solid var(–line);
+border-radius: 20px;
+padding: 40px 32px;
+text-align: center;
+}
+
+.qr-heading {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.6rem;
+font-style: italic;
+color: var(–cream);
+margin-bottom: 8px;
+}
+
+.qr-sub {
+font-size: .88rem;
+font-weight: 300;
+color: var(–muted);
+margin-bottom: 28px;
+line-height: 1.5;
+}
+
+.qr-row {
+display: flex;
+gap: 8px;
+max-width: 480px;
 margin: 0 auto 28px;
 flex-wrap: wrap;
 justify-content: center;
 }
-.qr-input-row input {
-flex: 1; min-width: 240px;
-background: transparent;
+
+.qr-row input {
+flex: 1;
+min-width: 220px;
+background: rgba(255,255,255,.05);
 border: 1px solid var(–line);
-border-bottom-color: var(–gold);
-padding: 10px 14px;
-font-family: ‘DM Mono’, monospace;
-font-size: .78rem;
-color: var(–ink);
+border-radius: 10px;
+padding: 11px 16px;
+font-family: ‘Jost’, sans-serif;
+font-size: .85rem;
+font-weight: 300;
+color: var(–cream);
 outline: none;
 transition: border-color .2s;
 }
-.qr-input-row input:focus { border-color: var(–gold); }
-.qr-input-row input::placeholder { color: var(–muted); }
-.qr-btn {
+.qr-row input::placeholder { color: rgba(245,239,224,.3); }
+.qr-row input:focus { border-color: var(–gold); }
+
+.qr-row button {
 background: var(–gold);
-color: var(–cream);
+color: #0f1b0e;
 border: none;
-padding: 10px 22px;
-font-family: ‘DM Mono’, monospace;
-font-size: .72rem;
-letter-spacing: .1em;
-text-transform: uppercase;
+border-radius: 10px;
+padding: 11px 22px;
+font-family: ‘Jost’, sans-serif;
+font-size: .85rem;
+font-weight: 600;
+letter-spacing: .06em;
 cursor: pointer;
-transition: background .2s;
+transition: background .2s, transform .1s;
 }
-.qr-btn:hover { background: var(–warm); }
-#qr-output { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.qr-row button:hover { background: #e0b94e; }
+.qr-row button:active { transform: scale(.97); }
+
+#qr-output { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
 #qr-canvas-wrap {
-padding: 16px;
-background: #fff;
+background: var(–cream);
+padding: 14px;
+border-radius: 12px;
 display: inline-block;
-box-shadow: 0 4px 32px rgba(28,23,16,.12);
 }
 #qr-canvas-wrap canvas, #qr-canvas-wrap img { display: block; }
-.qr-url-display {
-font-family: ‘DM Mono’, monospace;
-font-size: .65rem;
+
+.qr-url {
+font-size: .7rem;
 color: var(–muted);
 word-break: break-all;
-max-width: 340px;
+max-width: 320px;
+letter-spacing: .04em;
 }
-.qr-download-btn {
-background: transparent;
+
+.qr-dl {
+display: inline-block;
 border: 1px solid var(–gold);
 color: var(–gold);
+border-radius: 8px;
 padding: 8px 20px;
-font-family: ‘DM Mono’, monospace;
-font-size: .65rem;
-letter-spacing: .12em;
-text-transform: uppercase;
-cursor: pointer;
+font-family: ‘Jost’, sans-serif;
+font-size: .78rem;
+font-weight: 500;
+letter-spacing: .1em;
 text-decoration: none;
-display: inline-block;
+text-transform: uppercase;
 transition: all .2s;
 }
-.qr-download-btn:hover { background: var(–gold); color: var(–cream); }
+.qr-dl:hover { background: var(–gold); color: var(–bg); }
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer {
 border-top: 1px solid var(–line);
-padding: 32px 28px;
+padding: 32px 24px;
 text-align: center;
-font-family: ‘DM Mono’, monospace;
-font-size: .62rem;
-letter-spacing: .18em;
+font-size: .65rem;
+font-weight: 400;
+letter-spacing: .2em;
 text-transform: uppercase;
-color: var(–muted);
-}
-
-@media (max-width: 600px) {
-.hero { padding: 48px 20px 40px; }
-h1 { font-size: 2.8rem; }
-.hero-details { gap: 20px; }
-.slot { grid-template-columns: 62px 14px 1fr; gap: 0 10px; }
-.speakers-grid { grid-template-columns: 1fr 1fr; }
-.venue-block { grid-template-columns: 1fr; padding: 20px; }
-.qr-section { padding: 24px 16px; }
+color: rgba(245,239,224,.25);
 }
 </style>
 
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-bg"></div>
-  <p class="pre-title">Milano &middot; 15 Settembre 2026</p>
-  <h1>Forum<br><em>Innovazione</em></h1>
-  <p class="hero-sub">Visioni, tecnologia e futuro del lavoro</p>
-  <div class="hero-details">
-    <div class="detail-item">
-      <span class="detail-label">Data</span>
-      <span class="detail-value">15 Settembre 2026</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Orario</span>
-      <span class="detail-value">09:00 &mdash; 18:30</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Sede</span>
-      <span class="detail-value">Palazzo delle Stelline, Milano</span>
-    </div>
-    <div class="detail-item">
-      <span class="detail-label">Edizione</span>
-      <span class="detail-value">VII &middot; 2026</span>
-    </div>
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-gold"></div>
+
+  <p class="pre-label">APS Oltreconfine &nbsp;·&nbsp; Sagra 2025</p>
+
+  <h1 class="hero-title">
+    Stappa
+    <span>!</span>
+  </h1>
+
+  <div class="hero-divider"></div>
+
+  <p class="hero-dates">26 &amp; 27 Giugno 2025</p>
+  <p class="hero-tagline">Musica dal vivo &nbsp;·&nbsp; Cucina tipica &nbsp;·&nbsp; Buon vino</p>
+
+  <div class="scroll-hint">
+    <span>Scopri</span>
+    <div class="scroll-line"></div>
   </div>
-</header>
+</section>
+
+<!-- CONTENT -->
 
 <main class="container">
 
-  <p class="section-label">Programma della giornata</p>
-  <div class="programme">
+  <!-- SERATE -->
+
+  <div class="block">
+    <p class="block-label">Serate live</p>
+    <div class="nights">
+      <div class="night">
+        <div class="night-day">Giovedì 26 Giugno</div>
+        <div class="night-artist">Nicola<br>Torresi</div>
+        <span class="night-badge">♪ Live Music</span>
+      </div>
+      <div class="night">
+        <div class="night-day">Venerdì 27 Giugno</div>
+        <div class="night-artist">Frankie<br>di Palma</div>
+        <span class="night-badge">♪ Live Music</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENU -->
+
+  <div class="block">
+    <p class="block-label">Il menu</p>
 
 ```
-<div class="slot">
-  <div class="slot-time">09:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Registrazione e <em>Welcome Coffee</em></div>
-    <div class="slot-desc">Accredito partecipanti, networking informale e colazione di benvenuto.</div>
-    <span class="tag break">Networking</span>
+<div class="menu-category">
+  <div class="category-name">Primi Piatti</div>
+  <div class="menu-list">
+    <div class="menu-row">
+      <div class="menu-dot"></div>
+      <span class="menu-name">Gnocchi all'anatra</span>
+    </div>
+    <div class="menu-row">
+      <div class="menu-dot"></div>
+      <span class="menu-name">Gnocchi al pesto</span>
+    </div>
+    <div class="menu-row">
+      <div class="menu-dot"></div>
+      <span class="menu-name">Fettuccine al cinghiale</span>
+    </div>
   </div>
 </div>
 
-<div class="slot">
-  <div class="slot-time">10:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title"><em>Opening Keynote:</em> Il Decennio della Trasformazione</div>
-    <div class="slot-speaker">Prof. Elena Marchetti &mdash; Politecnico di Milano</div>
-    <div class="slot-desc">Una panoramica sui cambiamenti strutturali che ridefiniscono industria, lavoro e società nei prossimi dieci anni.</div>
-    <span class="tag">Keynote</span>
+<div class="menu-category">
+  <div class="category-name">Secondi Piatti</div>
+  <div class="menu-list">
+    <div class="menu-row">
+      <div class="menu-dot sage"></div>
+      <span class="menu-name">Cinghiale in salmì</span>
+    </div>
+    <div class="menu-row">
+      <div class="menu-dot sage"></div>
+      <span class="menu-name">Capocollo in porchetta</span>
+    </div>
   </div>
 </div>
 
-<div class="slot">
-  <div class="slot-time">11:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Intelligenza Artificiale e <em>Capitale Umano</em></div>
-    <div class="slot-speaker">Marco Ferretti &mdash; CEO, NeuralBridge SpA</div>
-    <div class="slot-desc">Come le organizzazioni possono integrare l'AI aumentando il valore delle persone, non sostituendole.</div>
-    <span class="tag">Talk</span>
-  </div>
-</div>
-
-<div class="slot">
-  <div class="slot-time">12:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Tavola Rotonda: <em>Startup vs Corporate</em></div>
-    <div class="slot-speaker">Moderatrice: Giulia Rossi &mdash; Partner, Horizon Ventures</div>
-    <div class="slot-desc">Quattro fondatori e quattro executive a confronto su velocità, cultura e innovazione sistemica.</div>
-    <span class="tag">Panel</span>
-  </div>
-</div>
-
-<div class="slot">
-  <div class="slot-time">13:30</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Pranzo e <em>Open Networking</em></div>
-    <div class="slot-desc">Buffet nei chiostri con sessioni informali di speed networking facilitate dagli organizzatori.</div>
-    <span class="tag break">Pausa</span>
-  </div>
-</div>
-
-<div class="slot">
-  <div class="slot-time">15:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Workshop Paralleli <em>(3 track)</em></div>
-    <div class="slot-speaker">Track A &middot; B &middot; C &mdash; Aule 1, 2, 3</div>
-    <div class="slot-desc">Design Thinking applicato &middot; Sostenibilità e business model &middot; Future of Work: policy e contrattazione.</div>
-    <span class="tag">Workshop</span>
-  </div>
-</div>
-
-<div class="slot">
-  <div class="slot-time">17:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title"><em>Closing Talk:</em> Costruire il Domani Adesso</div>
-    <div class="slot-speaker">Luca Bianchi &mdash; Segretario Generale, Fondazione Italia Digitale</div>
-    <div class="slot-desc">Dall'ispirazione all'azione: un manifesto operativo per i prossimi dodici mesi.</div>
-    <span class="tag">Keynote</span>
-  </div>
-</div>
-
-<div class="slot">
-  <div class="slot-time">18:00</div>
-  <div class="slot-dot"><div class="dot"></div><div class="dot-line"></div></div>
-  <div class="slot-body">
-    <div class="slot-title">Aperitivo di <em>Chiusura</em></div>
-    <div class="slot-desc">Rinfresco conclusivo nel cortile interno. Premiazione delle startup dell'anno.</div>
-    <span class="tag break">Social</span>
+<div class="menu-category">
+  <div class="category-name">Street Food</div>
+  <div class="menu-list">
+    <div class="menu-row">
+      <div class="menu-dot green"></div>
+      <span class="menu-name">Wrap porchetta</span>
+    </div>
+    <div class="menu-row">
+      <div class="menu-dot green"></div>
+      <span class="menu-name">Wrap pollo</span>
+    </div>
+    <div class="menu-row">
+      <div class="menu-dot green"></div>
+      <span class="menu-name">Fish &amp; chips</span>
+    </div>
   </div>
 </div>
 ```
 
   </div>
 
-  <!-- RELATORI -->
+  <!-- QR -->
 
-  <p class="section-label">Relatori</p>
-  <div class="speakers-grid">
-    <div class="speaker-card">
-      <div class="speaker-initial">EM</div>
-      <div class="speaker-name">Elena Marchetti</div>
-      <div class="speaker-role">Professore Ordinario<br>Politecnico di Milano</div>
+  <div class="block">
+    <p class="block-label">Condividi</p>
+    <div class="qr-wrap">
+      <p class="qr-heading">Genera il QR Code</p>
+      <p class="qr-sub">Inserisci l'URL della pagina per ottenere il codice<br>da stampare e appendere ovunque</p>
+      <div class="qr-row">
+        <input type="url" id="qr-url-input" placeholder="https://aps-oltreconfine.github.io/stappa/" />
+        <button onclick="generateQR()">Genera</button>
+      </div>
+      <div id="qr-output"></div>
     </div>
-    <div class="speaker-card">
-      <div class="speaker-initial">MF</div>
-      <div class="speaker-name">Marco Ferretti</div>
-      <div class="speaker-role">CEO &amp; Co-founder<br>NeuralBridge SpA</div>
-    </div>
-    <div class="speaker-card">
-      <div class="speaker-initial">GR</div>
-      <div class="speaker-name">Giulia Rossi</div>
-      <div class="speaker-role">Partner<br>Horizon Ventures</div>
-    </div>
-    <div class="speaker-card">
-      <div class="speaker-initial">LB</div>
-      <div class="speaker-name">Luca Bianchi</div>
-      <div class="speaker-role">Segretario Generale<br>Fondazione Italia Digitale</div>
-    </div>
-  </div>
-
-  <!-- SEDE -->
-
-  <p class="section-label">Sede</p>
-  <div class="venue-block">
-    <div>
-      <div class="venue-item-label">Indirizzo</div>
-      <div class="venue-item-value">Palazzo delle Stelline<br>Corso Magenta, 61<br>20123 Milano</div>
-    </div>
-    <div>
-      <div class="venue-item-label">Come arrivare</div>
-      <div class="venue-item-value">MM2 Cadorna (5 min a piedi)<br>Tram 16, 27 &middot; Fermata Carrobbio<br>Parcheggio convenzionato via De Amicis</div>
-    </div>
-    <div>
-      <div class="venue-item-label">Contatti</div>
-      <div class="venue-item-value">info@foruminnovazione.it<br>+39 02 1234 5678</div>
-    </div>
-    <div>
-      <div class="venue-item-label">Accesso</div>
-      <div class="venue-item-value">Badge obbligatorio<br>Registrazione dalle 08:30<br>Dress code: smart casual</div>
-    </div>
-  </div>
-
-  <!-- QR CODE -->
-
-  <p class="section-label">QR Code per condivisione</p>
-  <div class="qr-section">
-    <p class="qr-title">Genera il QR Code</p>
-    <p class="qr-subtitle">Inserisci l'URL dove pubblicherai questa pagina per ottenere il codice da stampare o condividere</p>
-    <div class="qr-input-row">
-      <input type="url" id="qr-url-input" placeholder="https://tuosito.it/programma-evento" />
-      <button class="qr-btn" onclick="generateQR()">Genera QR</button>
-    </div>
-    <div id="qr-output"></div>
   </div>
 
 </main>
 
-<footer>
-  &copy; 2026 Forum Innovazione &middot; Tutti i diritti riservati &middot; foruminnovazione.it
-</footer>
+<footer>© 2025 Stappa &nbsp;·&nbsp; APS Oltreconfine</footer>
 
 <script>
   function generateQR() {
@@ -564,27 +571,27 @@ h1 { font-size: 2.8rem; }
 
     new QRCode(wrap, {
       text: url,
-      width: 220,
-      height: 220,
-      colorDark: '#1c1710',
-      colorLight: '#ffffff',
+      width: 200,
+      height: 200,
+      colorDark: '#0f1b0e',
+      colorLight: '#f5efe0',
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    const urlLabel = document.createElement('p');
-    urlLabel.className = 'qr-url-display';
-    urlLabel.textContent = url;
-    output.appendChild(urlLabel);
+    const label = document.createElement('p');
+    label.className = 'qr-url';
+    label.textContent = url;
+    output.appendChild(label);
 
     setTimeout(() => {
       const canvas = wrap.querySelector('canvas');
       if (canvas) {
-        const link = document.createElement('a');
-        link.className = 'qr-download-btn';
-        link.textContent = '\u2193 Scarica PNG';
-        link.download = 'qrcode-evento.png';
-        link.href = canvas.toDataURL('image/png');
-        output.appendChild(link);
+        const a = document.createElement('a');
+        a.className = 'qr-dl';
+        a.textContent = '↓ Scarica PNG';
+        a.download = 'qr-stappa.png';
+        a.href = canvas.toDataURL('image/png');
+        output.appendChild(a);
       }
     }, 300);
   }
