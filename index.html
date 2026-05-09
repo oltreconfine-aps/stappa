@@ -1,601 +1,932 @@
 <!DOCTYPE html>
-
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stappa 2025</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-  :root {
-    --bg:      #0f1b0e;
-    --surface: #162114;
-    --green:   #4a8c3f;
-    --sage:    #7eb572;
-    --gold:    #d4a843;
-    --cream:   #f5efe0;
-    --muted:   rgba(245,239,224,.5);
-    --line:    rgba(212,168,67,.2);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stappa! – Wine · Food · Music · Montecarotto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display:ital@0;1&family=Karla:wght@400;500;700&display=swap" rel="stylesheet" />
 
-- { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  <style>
+    :root {
+      --wine:    #7B1C2A;
+      --wine-dk: #4E0F1A;
+      --gold:    #C9963A;
+      --cream:   #F5EDD8;
+      --chalk:   #FAF6EE;
+      --ink:     #1A1008;
+      --mist:    rgba(245,237,216,.12);
+    }
 
-body {
-background: var(–bg);
-color: var(–cream);
-font-family: ‘Jost’, sans-serif;
-font-weight: 300;
-min-height: 100vh;
-overflow-x: hidden;
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── NOISE TEXTURE ── */
-body::after {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=‘0.9’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’ opacity=‘0.035’/%3E%3C/svg%3E”);
-pointer-events: none;
-z-index: 999;
-}
+    html { scroll-behavior: smooth; }
 
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(20px); }
-to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-from { opacity: 0; }
-to   { opacity: 1; }
-}
-@keyframes grow {
-from { transform: scaleX(0); }
-to   { transform: scaleX(1); }
-}
+    body {
+      background: var(--wine-dk);
+      color: var(--cream);
+      font-family: 'Karla', sans-serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
 
-/* ── HERO ── */
-.hero {
-min-height: 100vh;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
-padding: 60px 24px;
-position: relative;
-overflow: hidden;
-}
+    /* ── noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
 
-.hero-glow {
-position: absolute;
-width: 600px; height: 600px;
-border-radius: 50%;
-background: radial-gradient(circle, rgba(74,140,63,.18) 0%, transparent 70%);
-top: 50%; left: 50%;
-transform: translate(-50%, -50%);
-pointer-events: none;
-}
+    /* ── sections ── */
+    section { position: relative; z-index: 1; }
 
-.hero-glow-gold {
-position: absolute;
-width: 800px; height: 300px;
-border-radius: 50%;
-background: radial-gradient(ellipse, rgba(212,168,67,.07) 0%, transparent 70%);
-bottom: 0; left: 50%;
-transform: translateX(-50%);
-pointer-events: none;
-}
+    /* ━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 4rem;
+      overflow: hidden;
+    }
 
-.pre-label {
-font-size: .68rem;
-font-weight: 500;
-letter-spacing: .45em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 28px;
-opacity: 0;
-animation: fadeUp .7s ease forwards .1s;
-}
+    /* radial glow behind title */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 45%, rgba(201,150,58,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-.hero-title {
-font-family: ‘Playfair Display’, serif;
-font-size: clamp(5rem, 22vw, 11rem);
-font-weight: 700;
-line-height: .95;
-letter-spacing: -.02em;
-color: var(–cream);
-opacity: 0;
-animation: fadeUp .8s ease forwards .25s;
-}
+    /* rolling waves */
+    .waves-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .waves-wrap svg {
+      position: absolute;
+      width: 200%;
+      left: 0;
+    }
+    .wave1 { bottom: 18%; animation: waveSlide 14s linear infinite; opacity: .18; }
+    .wave2 { bottom: 10%; animation: waveSlide 20s linear infinite reverse; opacity: .12; }
+    .wave3 { bottom: 3%;  animation: waveSlide 17s linear infinite 3s; opacity: .10; }
+    .wave4 { top: 12%;   animation: waveSlide 22s linear infinite reverse 1s; opacity: .08; }
+    .wave5 { top: 2%;    animation: waveSlide 16s linear infinite 5s; opacity: .07; }
 
-.hero-title span {
-display: block;
-font-style: italic;
-color: var(–sage);
-}
+    @keyframes waveSlide {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
 
-.hero-divider {
-width: 60px;
-height: 1px;
-background: var(–gold);
-margin: 32px auto;
-transform-origin: left;
-transform: scaleX(0);
-animation: grow .8s ease forwards .5s;
-}
+    .badge {
+      display: inline-block;
+      font-family: 'Karla', sans-serif;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: .35rem 1.1rem;
+      border-radius: 2px;
+      margin-bottom: 1.6rem;
+      position: relative; z-index: 2;
+      animation: fadeDown .7s ease both;
+    }
 
-.hero-dates {
-font-size: 1.1rem;
-font-weight: 400;
-letter-spacing: .18em;
-text-transform: uppercase;
-color: var(–cream);
-opacity: 0;
-animation: fadeUp .7s ease forwards .6s;
-}
+    .hero-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(5.5rem, 22vw, 14rem);
+      line-height: .88;
+      letter-spacing: -.02em;
+      color: var(--cream);
+      position: relative; z-index: 2;
+      animation: fadeDown .8s ease .1s both;
+    }
 
-.hero-tagline {
-margin-top: 10px;
-font-size: .9rem;
-font-weight: 300;
-color: var(–muted);
-letter-spacing: .1em;
-opacity: 0;
-animation: fadeUp .7s ease forwards .75s;
-}
+    .hero-title span.pop {
+      color: var(--gold);
+      -webkit-text-stroke: 2px var(--gold);
+    }
 
-.scroll-hint {
-position: absolute;
-bottom: 32px;
-left: 50%;
-transform: translateX(-50%);
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-opacity: 0;
-animation: fadeIn 1s ease forwards 1.2s;
-}
-.scroll-hint span {
-font-size: .6rem;
-letter-spacing: .3em;
-text-transform: uppercase;
-color: var(–muted);
-}
-.scroll-line {
-width: 1px;
-height: 40px;
-background: linear-gradient(to bottom, var(–gold), transparent);
-animation: scrollPulse 2s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-0%, 100% { opacity: .4; transform: scaleY(1); }
-50%       { opacity: 1;  transform: scaleY(1.15); }
-}
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+      color: rgba(245,237,216,.75);
+      letter-spacing: .04em;
+      position: relative; z-index: 2;
+      animation: fadeDown .8s ease .2s both;
+    }
 
-/* ── CONTENT ── */
-.container { max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+    .tags {
+      margin-top: 1.8rem;
+      display: flex;
+      gap: .9rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative; z-index: 2;
+      animation: fadeDown .8s ease .3s both;
+    }
+    .tag {
+      background: rgba(201,150,58,.15);
+      border: 1px solid rgba(201,150,58,.4);
+      color: var(--gold);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      border-radius: 50px;
+    }
 
-.block {
-padding-top: 80px;
-opacity: 0;
-transform: translateY(24px);
-animation: fadeUp .7s ease forwards;
-}
-.block:nth-child(1) { animation-delay: .1s }
-.block:nth-child(2) { animation-delay: .25s }
-.block:nth-child(3) { animation-delay: .4s }
-.block:nth-child(4) { animation-delay: .55s }
+    .dates-row {
+      margin-top: 4.5rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative; z-index: 2;
+      animation: fadeDown .8s ease .4s both;
+    }
+    .date-pill {
+      background: var(--wine);
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      padding: .7rem 2rem;
+      text-align: center;
+    }
+    .date-pill .dow {
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .date-pill .day {
+      font-family: 'Abril Fatface', serif;
+      font-size: 2.4rem;
+      line-height: 1;
+      color: var(--cream);
+    }
+    .date-pill .month {
+      font-size: .75rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.6);
+      font-weight: 700;
+    }
 
-.block-label {
-font-size: .62rem;
-font-weight: 500;
-letter-spacing: .4em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 28px;
-display: flex;
-align-items: center;
-gap: 14px;
-}
-.block-label::after {
-content: ‘’;
-flex: 1;
-height: 1px;
-background: var(–line);
-}
+    .location-strip {
+      margin-top: 2rem;
+      position: relative; z-index: 2;
+      font-size: .78rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.45);
+      animation: fadeDown .8s ease .5s both;
+    }
+    .location-strip strong { color: rgba(245,237,216,.7); }
 
-/* ── SERATE ── */
-.nights { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-@media (max-width: 520px) { .nights { grid-template-columns: 1fr; } }
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 3rem auto;
+      position: relative; z-index: 1;
+    }
 
-.night {
-background: var(–surface);
-padding: 32px 28px;
-position: relative;
-overflow: hidden;
-transition: background .25s;
-}
-.night:first-child { border-radius: 16px 0 0 16px; }
-.night:last-child  { border-radius: 0 16px 16px 0; }
-@media (max-width: 520px) {
-.night:first-child { border-radius: 16px 16px 0 0; }
-.night:last-child  { border-radius: 0 0 16px 16px; }
-}
+    /* ━━━━━━━━━━━━━━ DEGUSTAZIONE ━━━━━━━━━━━━━━ */
+    .degu-section {
+      padding: 3rem 1.5rem 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-.night::before {
-content: ‘’;
-position: absolute;
-top: 0; left: 0; right: 0;
-height: 2px;
-background: linear-gradient(90deg, var(–green), var(–gold));
-opacity: 0;
-transition: opacity .3s;
-}
-.night:hover { background: #1d2e1b; }
-.night:hover::before { opacity: 1; }
+    .degu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.6rem;
+      margin-bottom: 3rem;
+    }
 
-.night-day {
-font-size: .65rem;
-font-weight: 500;
-letter-spacing: .3em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 12px;
-}
+    .degu-card {
+      background: rgba(245,237,216,.04);
+      border: 1px solid rgba(201,150,58,.2);
+      border-radius: 10px;
+      padding: 2rem 1.6rem;
+      text-align: center;
+    }
 
-.night-artist {
-font-family: ‘Playfair Display’, serif;
-font-size: 1.8rem;
-font-weight: 400;
-line-height: 1.1;
-color: var(–cream);
-margin-bottom: 16px;
-}
+    .degu-card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
 
-.night-badge {
-display: inline-flex;
-align-items: center;
-gap: 6px;
-border: 1px solid var(–line);
-border-radius: 999px;
-padding: 4px 12px;
-font-size: .65rem;
-font-weight: 500;
-letter-spacing: .1em;
-text-transform: uppercase;
-color: var(–sage);
-}
+    .degu-card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: .75rem;
+      line-height: 1.3;
+    }
 
-/* ── MENU ── */
-.menu-category { margin-bottom: 36px; }
-.menu-category:last-child { margin-bottom: 0; }
+    .degu-card-body {
+      font-size: .88rem;
+      color: rgba(245,237,216,.6);
+      line-height: 1.7;
+    }
 
-.category-name {
-font-size: .62rem;
-font-weight: 500;
-letter-spacing: .3em;
-text-transform: uppercase;
-color: var(–sage);
-margin-bottom: 12px;
-padding-bottom: 8px;
-border-bottom: 1px solid var(–line);
-}
+    .degu-card-body strong {
+      color: var(--gold);
+      font-weight: 700;
+    }
 
-.menu-list { display: flex; flex-direction: column; gap: 1px; }
+    /* salottino */
+    .salottino {
+      background: linear-gradient(135deg, var(--wine) 0%, rgba(78,15,26,.9) 100%);
+      border: 1px solid rgba(201,150,58,.3);
+      border-radius: 12px;
+      padding: 2rem 2rem 2.2rem;
+      text-align: center;
+    }
 
-.menu-row {
-display: flex;
-align-items: center;
-gap: 16px;
-padding: 14px 20px;
-background: var(–surface);
-transition: background .2s, padding-left .2s;
-cursor: default;
-}
-.menu-row:first-child { border-radius: 12px 12px 0 0; }
-.menu-row:last-child  { border-radius: 0 0 12px 12px; }
-.menu-row:only-child  { border-radius: 12px; }
-.menu-row:hover { background: #1d2e1b; padding-left: 24px; }
+    .salottino-label {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      letter-spacing: .03em;
+      margin-bottom: .4rem;
+    }
 
-.menu-dot {
-width: 5px; height: 5px;
-border-radius: 50%;
-background: var(–gold);
-flex-shrink: 0;
-opacity: .6;
-}
-.menu-dot.sage  { background: var(–sage); }
-.menu-dot.green { background: var(–green); }
+    .salottino-desc {
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.45);
+      margin-bottom: 2rem;
+    }
 
-.menu-name {
-font-size: 1rem;
-font-weight: 400;
-color: var(–cream);
-letter-spacing: .02em;
-}
+    .salottino-days {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
-/* ── QR ── */
-.qr-wrap {
-background: var(–surface);
-border: 1px solid var(–line);
-border-radius: 20px;
-padding: 40px 32px;
-text-align: center;
-}
+    .salottino-day {
+      min-width: 180px;
+    }
 
-.qr-heading {
-font-family: ‘Playfair Display’, serif;
-font-size: 1.6rem;
-font-style: italic;
-color: var(–cream);
-margin-bottom: 8px;
-}
+    .salottino-day-header {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: .9rem;
+      border-bottom: 1px solid rgba(201,150,58,.25);
+      padding-bottom: .6rem;
+    }
 
-.qr-sub {
-font-size: .88rem;
-font-weight: 300;
-color: var(–muted);
-margin-bottom: 28px;
-line-height: 1.5;
-}
+    .salottino-day-num {
+      font-family: 'Abril Fatface', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
 
-.qr-row {
-display: flex;
-gap: 8px;
-max-width: 480px;
-margin: 0 auto 28px;
-flex-wrap: wrap;
-justify-content: center;
-}
+    .salottino-day-name {
+      font-size: .7rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.5);
+      font-weight: 700;
+    }
 
-.qr-row input {
-flex: 1;
-min-width: 220px;
-background: rgba(255,255,255,.05);
-border: 1px solid var(–line);
-border-radius: 10px;
-padding: 11px 16px;
-font-family: ‘Jost’, sans-serif;
-font-size: .85rem;
-font-weight: 300;
-color: var(–cream);
-outline: none;
-transition: border-color .2s;
-}
-.qr-row input::placeholder { color: rgba(245,239,224,.3); }
-.qr-row input:focus { border-color: var(–gold); }
+    .salottino-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
 
-.qr-row button {
-background: var(–gold);
-color: #0f1b0e;
-border: none;
-border-radius: 10px;
-padding: 11px 22px;
-font-family: ‘Jost’, sans-serif;
-font-size: .85rem;
-font-weight: 600;
-letter-spacing: .06em;
-cursor: pointer;
-transition: background .2s, transform .1s;
-}
-.qr-row button:hover { background: #e0b94e; }
-.qr-row button:active { transform: scale(.97); }
+    .salottino-list li {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--cream);
+    }
 
-#qr-output { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    /* ━━━━━━━━━━━━━━ PROGRAMME ━━━━━━━━━━━━━━ */
+    .programme {
+      padding: 3rem 1.5rem 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-#qr-canvas-wrap {
-background: var(–cream);
-padding: 14px;
-border-radius: 12px;
-display: inline-block;
-}
-#qr-canvas-wrap canvas, #qr-canvas-wrap img { display: block; }
+    .section-label {
+      text-align: center;
+      font-size: .68rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: .6rem;
+    }
 
-.qr-url {
-font-size: .7rem;
-color: var(–muted);
-word-break: break-all;
-max-width: 320px;
-letter-spacing: .04em;
-}
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      text-align: center;
+      color: var(--cream);
+      margin-bottom: 4rem;
+    }
 
-.qr-dl {
-display: inline-block;
-border: 1px solid var(–gold);
-color: var(–gold);
-border-radius: 8px;
-padding: 8px 20px;
-font-family: ‘Jost’, sans-serif;
-font-size: .78rem;
-font-weight: 500;
-letter-spacing: .1em;
-text-decoration: none;
-text-transform: uppercase;
-transition: all .2s;
-}
-.qr-dl:hover { background: var(–gold); color: var(–bg); }
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 2rem;
+    }
 
-/* ── FOOTER ── */
-footer {
-border-top: 1px solid var(–line);
-padding: 32px 24px;
-text-align: center;
-font-size: .65rem;
-font-weight: 400;
-letter-spacing: .2em;
-text-transform: uppercase;
-color: rgba(245,239,224,.25);
-}
-</style>
+    .day-card {
+      background: rgba(245,237,216,.05);
+      border: 1px solid rgba(201,150,58,.2);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .day-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    }
 
+    .day-card-header {
+      background: linear-gradient(135deg, var(--wine) 0%, rgba(78,15,26,.9) 100%);
+      padding: 1.2rem 1.6rem;
+      border-bottom: 1px solid rgba(201,150,58,.25);
+      display: flex;
+      align-items: baseline;
+      gap: .8rem;
+    }
+    .day-card-header .day-num {
+      font-family: 'Abril Fatface', serif;
+      font-size: 2.8rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .day-card-header .day-info { }
+    .day-card-header .day-info .dname {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+    }
+    .day-card-header .day-info .dmonth {
+      font-size: .7rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.5);
+    }
+
+    .venues { padding: 1.4rem 1.6rem; display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .venue {
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+    }
+    .venue-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(201,150,58,.15);
+      border: 1px solid rgba(201,150,58,.35);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .venue-text { }
+    .venue-name {
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .artist {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .venue + .venue {
+      border-top: 1px solid rgba(245,237,216,.08);
+      padding-top: 1.2rem;
+    }
+
+    /* ━━━━━━━━━━━━━━ MENU ━━━━━━━━━━━━━━ */
+    .menu-section {
+      padding: 3rem 1.5rem 5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.6rem;
+    }
+
+    .menu-card {
+      background: rgba(245,237,216,.04);
+      border: 1px solid rgba(201,150,58,.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .menu-card-title {
+      background: linear-gradient(135deg, var(--wine) 0%, rgba(78,15,26,.9) 100%);
+      border-bottom: 1px solid rgba(201,150,58,.25);
+      padding: .7rem 1.4rem;
+      font-family: 'Abril Fatface', serif;
+      font-size: 1rem;
+      letter-spacing: .06em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .menu-items { padding: 1rem 1.4rem; display: flex; flex-direction: column; gap: .75rem; }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .5rem;
+    }
+    .menu-item-left { flex: 1; }
+    .menu-item-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--cream);
+      line-height: 1.25;
+    }
+    .menu-item-desc {
+      font-size: .72rem;
+      color: rgba(245,237,216,.45);
+      margin-top: .15rem;
+      line-height: 1.4;
+    }
+    .menu-item-price {
+      font-family: 'Abril Fatface', serif;
+      font-size: .95rem;
+      color: var(--gold);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .menu-item + .menu-item {
+      border-top: 1px solid rgba(245,237,216,.07);
+      padding-top: .75rem;
+    }
+
+    /* vini: tre colonne nome / produttore / prezzo */
+    .menu-item-vini {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: .3rem .8rem;
+      align-items: baseline;
+    }
+    .menu-item-vini .menu-item-producer {
+      font-size: .75rem;
+      color: rgba(245,237,216,.45);
+      font-style: italic;
+    }
+    .menu-item-vini + .menu-item-vini {
+      border-top: 1px solid rgba(245,237,216,.07);
+      padding-top: .75rem;
+    }
+
+    /* ━━━━━━━━━━━━━━ FOOTER ━━━━━━━━━━━━━━ */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1.5rem 3rem;
+      font-size: .72rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: rgba(245,237,216,.3);
+      position: relative; z-index: 1;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    footer .logo-text {
+      font-family: 'Abril Fatface', serif;
+      font-size: 1.4rem;
+      color: rgba(245,237,216,.15);
+      letter-spacing: .05em;
+      display: block;
+      margin-bottom: .6rem;
+    }
+
+    /* ━━━━━━━━━━━━━━ ANIMATIONS ━━━━━━━━━━━━━━ */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scroll-triggered fade-in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ━━━━━━━━━━━━━━ RESPONSIVE ━━━━━━━━━━━━━━ */
+    @media (max-width: 480px) {
+      .hero-title { letter-spacing: -.03em; }
+      .dates-row { gap: .8rem; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HERO -->
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="waves-wrap">
+      <!-- wave 1 -->
+      <svg class="wave1" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 C180,80 360,0 540,40 C720,80 900,0 1080,40 C1260,80 1440,0 1440,40 L1440,80 L0,80 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1.5"/>
+        <path d="M1440,40 C1620,80 1800,0 1980,40 C2160,80 2340,0 2520,40 C2700,80 2880,0 2880,40 L2880,80 L1440,80 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1.5"/>
+      </svg>
+      <!-- wave 2 -->
+      <svg class="wave2" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1"/>
+        <path d="M1440,30 C1680,60 1920,0 2160,30 C2400,60 2640,0 2880,30 L2880,60 L1440,60 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1"/>
+      </svg>
+      <!-- wave 3 -->
+      <svg class="wave3" viewBox="0 0 1440 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,25 C160,50 320,0 480,25 C640,50 800,0 960,25 C1120,50 1280,0 1440,25 L1440,50 L0,50 Z" fill="none" stroke="rgba(245,237,216,1)" stroke-width="0.8"/>
+        <path d="M1440,25 C1600,50 1760,0 1920,25 C2080,50 2240,0 2400,25 C2560,50 2720,0 2880,25 L2880,50 L1440,50 Z" fill="none" stroke="rgba(245,237,216,1)" stroke-width="0.8"/>
+      </svg>
+      <!-- wave 4 top -->
+      <svg class="wave4" viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,35 C200,70 400,0 600,35 C800,70 1000,0 1200,35 C1400,70 1440,20 1440,35 L1440,70 L0,70 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1.2"/>
+        <path d="M1440,35 C1640,70 1840,0 2040,35 C2240,70 2440,0 2640,35 C2840,70 2880,20 2880,35 L2880,70 L1440,70 Z" fill="none" stroke="rgba(201,150,58,1)" stroke-width="1.2"/>
+      </svg>
+      <!-- wave 5 top -->
+      <svg class="wave5" viewBox="0 0 1440 45" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,22 C120,45 240,0 360,22 C480,45 600,0 720,22 C840,45 960,0 1080,22 C1200,45 1320,0 1440,22 L1440,45 L0,45 Z" fill="none" stroke="rgba(245,237,216,1)" stroke-width="0.6"/>
+        <path d="M1440,22 C1560,45 1680,0 1800,22 C1920,45 2040,0 2160,22 C2280,45 2400,0 2520,22 C2640,45 2760,0 2880,22 L2880,45 L1440,45 Z" fill="none" stroke="rgba(245,237,216,1)" stroke-width="0.6"/>
+      </svg>
+    </div>
 
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-glow-gold"></div>
+    <h1 class="hero-title">Stappa<span class="pop">!</span></h1>
 
-  <p class="pre-label">APS Oltreconfine &nbsp;·&nbsp; Sagra 2025</p>
-
-  <h1 class="hero-title">
-    Stappa
-    <span>!</span>
-  </h1>
-
-  <div class="hero-divider"></div>
-
-  <p class="hero-dates">26 &amp; 27 Giugno 2025</p>
-  <p class="hero-tagline">Musica dal vivo &nbsp;·&nbsp; Cucina tipica &nbsp;·&nbsp; Buon vino</p>
-
-  <div class="scroll-hint">
-    <span>Scopri</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- CONTENT -->
-
-<main class="container">
-
-  <!-- SERATE -->
-
-  <div class="block">
-    <p class="block-label">Serate live</p>
-    <div class="nights">
-      <div class="night">
-        <div class="night-day">Giovedì 26 Giugno</div>
-        <div class="night-artist">Nicola<br>Torresi</div>
-        <span class="night-badge">♪ Live Music</span>
+    <div class="dates-row">
+      <div class="date-pill">
+        <div class="dow">Venerdì</div>
+        <div class="day">26</div>
+        <div class="month">Giugno 2026</div>
       </div>
-      <div class="night">
-        <div class="night-day">Venerdì 27 Giugno</div>
-        <div class="night-artist">Frankie<br>di Palma</div>
-        <span class="night-badge">♪ Live Music</span>
+      <div class="date-pill">
+        <div class="dow">Sabato</div>
+        <div class="day">27</div>
+        <div class="month">Giugno 2026</div>
       </div>
     </div>
-  </div>
 
-  <!-- MENU -->
+    <p class="location-strip">📍 <strong>Montecarotto</strong> &ensp;·&ensp; Ancona, Marche</p>
+  </section>
 
-  <div class="block">
-    <p class="block-label">Il menu</p>
+  <div class="divider"></div>
 
-```
-<div class="menu-category">
-  <div class="category-name">Primi Piatti</div>
-  <div class="menu-list">
-    <div class="menu-row">
-      <div class="menu-dot"></div>
-      <span class="menu-name">Gnocchi all'anatra</span>
-    </div>
-    <div class="menu-row">
-      <div class="menu-dot"></div>
-      <span class="menu-name">Gnocchi al pesto</span>
-    </div>
-    <div class="menu-row">
-      <div class="menu-dot"></div>
-      <span class="menu-name">Fettuccine al cinghiale</span>
-    </div>
-  </div>
-</div>
+  <!-- ═══ DEGUSTAZIONE ═══ -->
+  <section class="degu-section reveal">
+    <p class="section-label">Piazza del Teatro</p>
+    <h2 class="section-title">L'area degustazione</h2>
 
-<div class="menu-category">
-  <div class="category-name">Secondi Piatti</div>
-  <div class="menu-list">
-    <div class="menu-row">
-      <div class="menu-dot sage"></div>
-      <span class="menu-name">Cinghiale in salmì</span>
-    </div>
-    <div class="menu-row">
-      <div class="menu-dot sage"></div>
-      <span class="menu-name">Capocollo in porchetta</span>
-    </div>
-  </div>
-</div>
+    <div class="degu-grid">
 
-<div class="menu-category">
-  <div class="category-name">Street Food</div>
-  <div class="menu-list">
-    <div class="menu-row">
-      <div class="menu-dot green"></div>
-      <span class="menu-name">Wrap porchetta</span>
-    </div>
-    <div class="menu-row">
-      <div class="menu-dot green"></div>
-      <span class="menu-name">Wrap pollo</span>
-    </div>
-    <div class="menu-row">
-      <div class="menu-dot green"></div>
-      <span class="menu-name">Fish &amp; chips</span>
-    </div>
-  </div>
-</div>
-```
-
-  </div>
-
-  <!-- QR -->
-
-  <div class="block">
-    <p class="block-label">Condividi</p>
-    <div class="qr-wrap">
-      <p class="qr-heading">Genera il QR Code</p>
-      <p class="qr-sub">Inserisci l'URL della pagina per ottenere il codice<br>da stampare e appendere ovunque</p>
-      <div class="qr-row">
-        <input type="url" id="qr-url-input" placeholder="https://aps-oltreconfine.github.io/stappa/" />
-        <button onclick="generateQR()">Genera</button>
+      <!-- VINI -->
+      <div class="degu-card">
+        <h3 class="degu-card-title">Degustazione Vini</h3>
+        <p class="degu-card-body">Un percorso tra i vini della zona, curato da <strong>Oltreconfine</strong> in collaborazione con <strong>AIS</strong> — Associazione Italiana Sommelier.</p>
       </div>
-      <div id="qr-output"></div>
+
+      <!-- PRODOTTI -->
+      <div class="degu-card">
+        <h3 class="degu-card-title">Degustazione Prodotti</h3>
+        <p class="degu-card-body">Eccellenze locali da assaggiare, coordinate da <strong>Agorà Caffè by Peppe</strong>.</p>
+      </div>
+
     </div>
-  </div>
 
-</main>
+    <!-- SALOTTINO DEI PRODUTTORI -->
+    <div class="salottino reveal">
+      <div class="salottino-label">Il salottino dei produttori</div>
+      <p class="salottino-desc">Ogni serata ospita i produttori delle cantine protagoniste dell'evento</p>
+      <div class="salottino-days">
 
-<footer>© 2025 Stappa &nbsp;·&nbsp; APS Oltreconfine</footer>
+        <div class="salottino-day">
+          <div class="salottino-day-header">
+            <span class="salottino-day-num">26</span>
+            <span class="salottino-day-name">Venerdì</span>
+          </div>
+          <ul class="salottino-list">
+            <li>Sabbionare</li>
+            <li>Tenuta Marchegiani</li>
+            <li>Fattoria San Lorenzo</li>
+          </ul>
+        </div>
 
-<script>
-  function generateQR() {
-    const url = document.getElementById('qr-url-input').value.trim();
-    if (!url) { alert('Inserisci un URL valido.'); return; }
+        <div class="salottino-day">
+          <div class="salottino-day-header">
+            <span class="salottino-day-num">27</span>
+            <span class="salottino-day-name">Sabato</span>
+          </div>
+          <ul class="salottino-list">
+            <li>Sartarelli</li>
+            <li>Albamocco</li>
+            <li>Poderi Mattioli</li>
+          </ul>
+        </div>
 
-    const output = document.getElementById('qr-output');
-    output.innerHTML = '';
+      </div>
+    </div>
 
-    const wrap = document.createElement('div');
-    wrap.id = 'qr-canvas-wrap';
-    output.appendChild(wrap);
+  </section>
 
-    new QRCode(wrap, {
-      text: url,
-      width: 200,
-      height: 200,
-      colorDark: '#0f1b0e',
-      colorLight: '#f5efe0',
-      correctLevel: QRCode.CorrectLevel.H
-    });
+  <div class="divider"></div>
 
-    const label = document.createElement('p');
-    label.className = 'qr-url';
-    label.textContent = url;
-    output.appendChild(label);
+  <!-- ═══ PROGRAMME ═══ -->
+  <section class="programme reveal">
+    <p class="section-label">Il programma</p>
+    <h2 class="section-title">Gli spettacoli</h2>
+    <div class="days-grid">
 
-    setTimeout(() => {
-      const canvas = wrap.querySelector('canvas');
-      if (canvas) {
-        const a = document.createElement('a');
-        a.className = 'qr-dl';
-        a.textContent = '↓ Scarica PNG';
-        a.download = 'qr-stappa.png';
-        a.href = canvas.toDataURL('image/png');
-        output.appendChild(a);
-      }
-    }, 300);
-  }
-</script>
+      <!-- GIORNO 1 -->
+      <div class="day-card reveal">
+        <div class="day-card-header">
+          <span class="day-num">26</span>
+          <div class="day-info">
+            <div class="dname">Venerdì</div>
+            <div class="dmonth">Giugno 2026</div>
+          </div>
+        </div>
+        <div class="venues">
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Piazza del Teatro</div>
+              <div class="artist">Burro e Salvia</div>
+            </div>
+          </div>
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Via Roma</div>
+              <div class="artist">OFF61</div>
+            </div>
+          </div>
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Piazzetta Oltreconfine</div>
+              <div class="artist">Nicola Torresi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GIORNO 2 -->
+      <div class="day-card reveal">
+        <div class="day-card-header">
+          <span class="day-num">27</span>
+          <div class="day-info">
+            <div class="dname">Sabato</div>
+            <div class="dmonth">Giugno 2026</div>
+          </div>
+        </div>
+        <div class="venues">
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Piazza del Teatro</div>
+              <div class="artist">I Fottutissimi</div>
+            </div>
+          </div>
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Via Roma</div>
+              <div class="artist">OFF61</div>
+            </div>
+          </div>
+          <div class="venue">
+            <div class="venue-text">
+              <div class="venue-name">Piazzetta Oltreconfine</div>
+              <div class="artist">Frankie di Palma</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══ MENU ═══ -->
+  <section class="menu-section reveal">
+    <p class="section-label">Da mangiare &amp; da bere</p>
+    <h2 class="section-title">Il menù</h2>
+
+    <div class="menu-grid">
+
+      <!-- PRIMI PIATTI -->
+      <div class="menu-card">
+        <div class="menu-card-title">Primi Piatti</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Gnocchi al pesto</div></div>
+            <div class="menu-item-price">€ 8,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Gnocchi all'anatra</div></div>
+            <div class="menu-item-price">€ 10,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Tagliatelle al ragù bianco di carne</div></div>
+            <div class="menu-item-price">€ 10,00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WRAP -->
+      <div class="menu-card">
+        <div class="menu-card-title">Wrap</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Porchetta Wrap</div>
+              <div class="menu-item-desc">Piadina arrotolata con porchetta, cavolo cappuccio, maionese e salsa bbq al miele</div>
+            </div>
+            <div class="menu-item-price">€ 8,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Chicken Wrap</div>
+              <div class="menu-item-desc">Piadina arrotolata con straccetti di pollo, chips croccanti, insalata, salsa yogurt, ketchup e maionese</div>
+            </div>
+            <div class="menu-item-price">€ 8,00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CRESCE DI POLENTA -->
+      <div class="menu-card">
+        <div class="menu-card-title">Cresce di Polenta</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Prosciutto crudo</div></div>
+            <div class="menu-item-price">€ 6,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Prosciutto crudo e erbe</div></div>
+            <div class="menu-item-price">€ 7,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Ciauscolo</div></div>
+            <div class="menu-item-price">€ 6,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Ciauscolo e pecorino</div></div>
+            <div class="menu-item-price">€ 7,50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Ciauscolo, pecorino e erbe</div></div>
+            <div class="menu-item-price">€ 8,00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEVANDE -->
+      <div class="menu-card">
+        <div class="menu-card-title">Bevande</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Acqua 0,5 L</div></div>
+            <div class="menu-item-price">€ 1,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Coca-Cola in lattina</div></div>
+            <div class="menu-item-price">€ 2,50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Vino al bicchiere</div></div>
+            <div class="menu-item-price">€ 1,50</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Birra alla spina</div></div>
+            <div class="menu-item-price">€ 5,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Pakkatello</div>
+              <div class="menu-item-desc">vino e fanta</div>
+            </div>
+            <div class="menu-item-price">€ 4,00</div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Caffè</div></div>
+            <div class="menu-item-price">€ 1,00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VINI (full width) -->
+      <div class="menu-card" style="grid-column: 1 / -1;">
+        <div class="menu-card-title">Vini</div>
+        <div class="menu-items">
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Cupo delle lame bianco</div>
+            <div class="menu-item-producer">Tenuta Marchegiani</div>
+            <div class="menu-item-price">€ 12,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Cupo delle lame rosso</div>
+            <div class="menu-item-producer">Tenuta Marchegiani</div>
+            <div class="menu-item-price">€ 12,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Le Vele</div>
+            <div class="menu-item-producer">Moncaro</div>
+            <div class="menu-item-price">€ 13,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Verde Ca' Ruptae</div>
+            <div class="menu-item-producer">Moncaro</div>
+            <div class="menu-item-price">€ 14,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Le Oche</div>
+            <div class="menu-item-producer">Fattoria San Lorenzo</div>
+            <div class="menu-item-price">€ 14,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Sabbionare</div>
+            <div class="menu-item-producer">Sabbionare</div>
+            <div class="menu-item-price">€ 14,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Classico</div>
+            <div class="menu-item-producer">Sartarelli</div>
+            <div class="menu-item-price">€ 13,00</div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Tralivio</div>
+            <div class="menu-item-producer">Sartarelli</div>
+            <div class="menu-item-price">€ 15,00</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <span class="logo-text">Stappa!</span>
+    Un evento organizzato da&nbsp;
+    <a href="https://www.instagram.com/associazioneoltreconfine" target="_blank" rel="noopener">APS Oltreconfine</a>
+    &ensp;·&ensp; Montecarotto, Ancona
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          // slight stagger for sibling cards
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
 
 </body>
 </html>
