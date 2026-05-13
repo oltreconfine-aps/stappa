@@ -205,18 +205,27 @@
       100% { transform: translateX(-50%); }
     }
 
+    /* ━━━━━━━━━━━━━━ SHARED CONTAINER ━━━━━━━━━━━━━━ */
+    .inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
     /* ━━━━━━━━━━━━━━ DEGUSTAZIONE ━━━━━━━━━━━━━━ */
     .degu-section {
       padding: 3rem 1.5rem 5rem;
-      max-width: 800px;
-      margin: 0 auto;
     }
 
     .degu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.6rem;
       margin-bottom: 3rem;
+    }
+
+    @media (max-width: 580px) {
+      .degu-grid { grid-template-columns: 1fr; }
     }
 
     .degu-card {
@@ -328,8 +337,6 @@
     /* ━━━━━━━━━━━━━━ PROGRAMME ━━━━━━━━━━━━━━ */
     .programme {
       padding: 3rem 1.5rem 5rem;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
     .section-label {
@@ -448,14 +455,18 @@
     /* ━━━━━━━━━━━━━━ PUNTI RISTORO ━━━━━━━━━━━━━━ */
     .ristoro-section {
       padding: 3rem 1.5rem 5rem;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
     .ristoro-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.4rem;
+    }
+
+    @media (max-width: 640px) {
+      .ristoro-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .ristoro-card {
@@ -488,14 +499,25 @@
     /* ━━━━━━━━━━━━━━ MENU ━━━━━━━━━━━━━━ */
     .menu-section {
       padding: 3rem 1.5rem 5rem;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1.6rem;
+    }
+
+    .menu-card-full {
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 600px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .menu-card-full {
+        grid-column: 1;
+      }
     }
 
     .menu-card {
@@ -700,6 +722,7 @@
   </section>
   <!-- ═══ DEGUSTAZIONE ═══ -->
   <section class="degu-section reveal">
+    <div class="inner">
     <p class="section-label">Piazza del Teatro</p>
     <h2 class="section-title">L'area degustazione</h2>
 
@@ -752,9 +775,11 @@
       </div>
     </div>
 
+    </div>
   </section>
   <!-- ═══ PROGRAMME ═══ -->
   <section class="programme reveal">
+    <div class="inner">
     <p class="section-label">Il programma</p>
     <h2 class="section-title">Gli spettacoli</h2>
     <div class="days-grid">
@@ -822,9 +847,11 @@
       </div>
 
     </div>
+    </div>
   </section>
   <!-- ═══ PUNTI RISTORO ═══ -->
   <section class="ristoro-section reveal">
+    <div class="inner">
     <p class="section-label">Dove mangiare</p>
     <h2 class="section-title">Punti ristoro</h2>
 
@@ -839,9 +866,11 @@
         <div class="ristoro-card-name">Pizzeria del Viale</div>
       </div>
     </div>
+    </div>
   </section>
   <!-- ═══ MENU ═══ -->
   <section class="menu-section reveal">
+    <div class="inner">
     <p class="section-label">Menù</p>
     <h2 class="section-title">Piazzetta Oltreconfine</h2>
 
@@ -862,6 +891,21 @@
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Tagliatelle al ragù bianco di carne</div></div>
             <div class="menu-item-price">€ 10,00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECONDI -->
+      <div class="menu-card">
+        <div class="menu-card-title">Secondi di Carne</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Capocollo in porchetta</div></div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Cinghiale in salmì</div></div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
@@ -887,21 +931,6 @@
         </div>
       </div>
 
-      <!-- SECONDI -->
-      <div class="menu-card">
-        <div class="menu-card-title">Secondi di Carne</div>
-        <div class="menu-items">
-          <div class="menu-item">
-            <div class="menu-item-left"><div class="menu-item-name">Capocollo in porchetta</div></div>
-            <div class="menu-item-price"></div>
-          </div>
-          <div class="menu-item">
-            <div class="menu-item-left"><div class="menu-item-name">Cinghiale in salmì</div></div>
-            <div class="menu-item-price"></div>
-          </div>
-        </div>
-      </div>
-
       <!-- FRITTO -->
       <div class="menu-card">
         <div class="menu-card-title">Fish &amp; Chips</div>
@@ -918,7 +947,7 @@
       </div>
 
       <!-- BEVANDE -->
-      <div class="menu-card">
+      <div class="menu-card menu-card-full">
         <div class="menu-card-title">Bevande</div>
         <div class="menu-items">
           <div class="menu-item">
@@ -952,7 +981,7 @@
       </div>
 
       <!-- VINI (full width) -->
-      <div class="menu-card" style="grid-column: 1 / -1;">
+      <div class="menu-card menu-card-full">
         <div class="menu-card-title">Vini</div>
         <div class="menu-items">
           <div class="menu-item-vini">
@@ -998,6 +1027,7 @@
         </div>
       </div>
 
+    </div>
     </div>
   </section>
   <!-- ═══ FOOTER ═══ -->
