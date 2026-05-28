@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stappa! – Montecarotto · Ancona · Marche</title>
+  <title>Stappa! – Wine · Food · Music · Montecarotto</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -454,11 +454,96 @@
       margin-top: .15rem;
     }
 
+    .venue-kids {
+      background: rgba(255,180,50,.06);
+      border: 1px solid rgba(255,180,50,.25);
+      border-radius: 8px;
+      padding: .9rem 1rem;
+      margin-bottom: .2rem;
+    }
+
+    .venue-kids .venue-name {
+      color: var(--orange);
+    }
+
+    .venue-kids-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: rgba(255,180,50,.65);
+      margin-top: .25rem;
+      text-transform: uppercase;
+    }
+
     .venue + .venue {
       border-top: 1px solid rgba(240,230,211,.08);
       padding-top: 1.2rem;
     }
 
+
+    /* ━━━━━━━━━━━━━━ ANGOLO BIMBI ━━━━━━━━━━━━━━ */
+    .kids-section {
+      margin-top: 3rem;
+      background: rgba(255,180,50,.06);
+      border: 1px solid rgba(255,180,50,.3);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+
+    .kids-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .kids-icon {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .kids-subtitle {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(.92rem, 4vw, 1.2rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .kids-collab {
+      font-size: inherit;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: inherit;
+      text-transform: none;
+    }
+
+    .kids-desc {
+      font-size: 1rem;
+      color: rgba(240,230,211,.75);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .kids-days {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    .kids-day-pill {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(255,180,50,.12);
+      border: 1px solid rgba(255,180,50,.35);
+      border-radius: 50px;
+      padding: .3rem .9rem;
+    }
 
     /* ━━━━━━━━━━━━━━ PUNTI RISTORO ━━━━━━━━━━━━━━ */
     .ristoro-section {
@@ -533,6 +618,16 @@
       border: 1px solid rgba(255,237,101,.2);
       border-radius: 10px;
       overflow: hidden;
+    }
+
+    .menu-wine-group-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-left: 1.4rem;
+      margin-bottom: .8rem;
     }
 
     .menu-card-title {
@@ -791,7 +886,7 @@
       <!-- VINI -->
       <div class="degu-card">
         <h3 class="degu-card-title">Degustazione Vini</h3>
-        <p class="degu-card-body">Un percorso tra i vini della zona, curato da <strong>Oltreconfine APS</strong> in collaborazione con <strong>AIS — Associazione Italiana Sommelier</strong>.</p>
+        <p class="degu-card-body">Un percorso tra i vini della zona, curato da Oltreconfine in collaborazione con <strong>AIS — Associazione Italiana Sommelier</strong>.</p>
       </div>
 
       <!-- PRODOTTI -->
@@ -841,8 +936,8 @@
   <!-- ═══ PROGRAMME ═══ -->
   <section class="programme reveal">
     <div class="inner">
-    <p class="section-label">Il programma</p>
-    <h2 class="section-title">Gli spettacoli</h2>
+    <p class="section-label">Eventi</p>
+    <h2 class="section-title">Musica</h2>
     <div class="days-grid">
 
       <!-- GIORNO 1 -->
@@ -872,7 +967,8 @@
           <div class="venue">
             <div class="venue-text">
               <div class="venue-name">Via Roma</div>
-              <div class="artist">OFF61</div>
+              <div class="artist">A Bad Day feat. Sara Ardizzoni, Egle Sommacal</div>
+              <div class="venue-time">Costa Est × Oltreconfine</div>
               <div class="venue-time">ore 20:30</div>
             </div>
           </div>
@@ -899,7 +995,7 @@
           <div class="venue">
             <div class="venue-text">
               <div class="venue-name">Piazza del Teatro</div>
-              <div class="artist">Ride my Lama</div>
+              <div class="artist">Brothers in law duo</div>
               <div class="venue-time">ore 18:30</div>
             </div>
           </div>
@@ -913,7 +1009,8 @@
           <div class="venue">
             <div class="venue-text">
               <div class="venue-name">Via Roma</div>
-              <div class="artist">OFF61</div>
+              <div class="artist">John De Farga</div>
+              <div class="venue-time">Costa Est × Oltreconfine</div>
               <div class="venue-time">ore 20:30</div>
             </div>
           </div>
@@ -928,6 +1025,22 @@
       </div>
 
     </div>
+
+    <!-- ANGOLO BIMBI -->
+    <div class="kids-section reveal">
+      <div class="kids-header">
+        <div>
+          <p class="section-label" style="text-align:left; margin-bottom:.2rem;">Via Roma · Angolo Bimbi</p>
+          <p class="kids-subtitle">Comunità Creattiva <span class="kids-collab">× Oltreconfine</span></p>
+        </div>
+      </div>
+      <p class="kids-desc">Intrattenimento dedicato ai più piccoli con letture, laboratori creativi e attività per bambini.</p>
+      <div class="kids-days">
+        <div class="kids-day-pill">Ven 26</div>
+        <div class="kids-day-pill">Sab 27</div>
+      </div>
+    </div>
+
     </div>
   </section>
   <!-- ═══ MENU ═══ -->
@@ -944,15 +1057,19 @@
         <div class="menu-items">
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Gnocchi al pesto</div></div>
-            <div class="menu-item-price">€ 8,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Gnocchi all'anatra</div></div>
-            <div class="menu-item-price">€ 10,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Tagliatelle al ragù bianco di carne</div></div>
-            <div class="menu-item-price">€ 10,00</div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Tagliatelle al ragù rosso di pesce</div></div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
@@ -962,11 +1079,11 @@
         <div class="menu-card-title">Secondi di Carne</div>
         <div class="menu-items">
           <div class="menu-item">
-            <div class="menu-item-left"><div class="menu-item-name">Capocollo in porchetta</div></div>
+            <div class="menu-item-left"><div class="menu-item-name">Capocollo in porchetta con erbe di campo strascinate</div></div>
             <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
-            <div class="menu-item-left"><div class="menu-item-name">Cinghiale in salmì</div></div>
+            <div class="menu-item-left"><div class="menu-item-name">Coscia di pollo con patatine fritte</div></div>
             <div class="menu-item-price"></div>
           </div>
         </div>
@@ -981,14 +1098,21 @@
               <div class="menu-item-name">Porchetta Wrap</div>
               <div class="menu-item-desc">Piadina arrotolata con porchetta, cavolo cappuccio, maionese e salsa bbq al miele</div>
             </div>
-            <div class="menu-item-price">€ 8,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left">
               <div class="menu-item-name">Chicken Wrap</div>
               <div class="menu-item-desc">Piadina arrotolata con straccetti di pollo, chips croccanti, insalata, salsa yogurt, ketchup e maionese</div>
             </div>
-            <div class="menu-item-price">€ 8,00</div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left">
+              <div class="menu-item-name">Vegan Wrap</div>
+              <div class="menu-item-desc">Piadina arrotolata con tofu marinato, cipolla, insalata, pomodori e salsa tzatziki</div>
+            </div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
@@ -999,92 +1123,123 @@
         <div class="menu-items">
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Pesce fritto</div></div>
-            <div class="menu-item-price">€ 14,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Patatine fritte</div></div>
-            <div class="menu-item-price">€ 3,50</div>
+            <div class="menu-item-price"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOLCI -->
+      <div class="menu-card">
+        <div class="menu-card-title">Dolci</div>
+        <div class="menu-items">
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Dolci misti</div></div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item">
+            <div class="menu-item-left"><div class="menu-item-name">Cheesecake ai frutti di bosco</div></div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
 
       <!-- BEVANDE -->
-      <div class="menu-card menu-card-full">
+      <div class="menu-card">
         <div class="menu-card-title">Bevande</div>
         <div class="menu-items">
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Acqua 0,5 L</div></div>
-            <div class="menu-item-price">€ 1,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Coca-Cola in lattina</div></div>
-            <div class="menu-item-price">€ 2,50</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Vino al bicchiere</div></div>
-            <div class="menu-item-price">€ 1,50</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left"><div class="menu-item-name">Birra alla spina</div></div>
-            <div class="menu-item-price">€ 5,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item">
             <div class="menu-item-left">
               <div class="menu-item-name">Pakkatello</div>
               <div class="menu-item-desc">vino e fanta</div>
             </div>
-            <div class="menu-item-price">€ 4,00</div>
-          </div>
-          <div class="menu-item">
-            <div class="menu-item-left"><div class="menu-item-name">Caffè</div></div>
-            <div class="menu-item-price">€ 1,00</div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
 
-      <!-- VINI (full width) -->
-      <div class="menu-card menu-card-full">
+      <!-- VINI (full width, riga propria) -->
+      <div class="menu-card menu-card-full" style="grid-column: 1 / -1;">
         <div class="menu-card-title">Vini</div>
+
+        <div class="menu-wine-group-label" style="margin-top:1.2rem;">Bianchi</div>
         <div class="menu-items">
           <div class="menu-item-vini">
-            <div class="menu-item-name">Cupo delle lame bianco</div>
+            <div class="menu-item-name">Cupo delle lame</div>
             <div class="menu-item-producer">Tenuta Marchegiani</div>
-            <div class="menu-item-price">€ 12,00</div>
-          </div>
-          <div class="menu-item-vini">
-            <div class="menu-item-name">Cupo delle lame rosso</div>
-            <div class="menu-item-producer">Tenuta Marchegiani</div>
-            <div class="menu-item-price">€ 12,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item-vini">
             <div class="menu-item-name">Le Vele</div>
             <div class="menu-item-producer">Moncaro</div>
-            <div class="menu-item-price">€ 13,00</div>
-          </div>
-          <div class="menu-item-vini">
-            <div class="menu-item-name">Verde Ca' Ruptae</div>
-            <div class="menu-item-producer">Moncaro</div>
-            <div class="menu-item-price">€ 14,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item-vini">
             <div class="menu-item-name">Le Oche</div>
             <div class="menu-item-producer">Fattoria San Lorenzo</div>
-            <div class="menu-item-price">€ 14,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item-vini">
             <div class="menu-item-name">Sabbionare</div>
             <div class="menu-item-producer">Sabbionare</div>
-            <div class="menu-item-price">€ 14,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item-vini">
-            <div class="menu-item-name">Classico</div>
+            <div class="menu-item-name">Sartarelli Classico</div>
             <div class="menu-item-producer">Sartarelli</div>
-            <div class="menu-item-price">€ 13,00</div>
+            <div class="menu-item-price"></div>
           </div>
           <div class="menu-item-vini">
             <div class="menu-item-name">Tralivio</div>
             <div class="menu-item-producer">Sartarelli</div>
-            <div class="menu-item-price">€ 15,00</div>
+            <div class="menu-item-price"></div>
+          </div>
+        </div>
+
+        <div class="menu-wine-group-label" style="margin-top:1.4rem;">Rossi</div>
+        <div class="menu-items">
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Cupo delle lame</div>
+            <div class="menu-item-producer">Tenuta Marchegiani</div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Burello</div>
+            <div class="menu-item-producer">Fattoria San Lorenzo</div>
+            <div class="menu-item-price"></div>
+          </div>
+        </div>
+
+        <div class="menu-wine-group-label" style="margin-top:1.4rem;">Dolci</div>
+        <div class="menu-items">
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Visciola del Cardinale</div>
+            <div class="menu-item-producer">Cantina del Cardinale</div>
+            <div class="menu-item-price"></div>
+          </div>
+          <div class="menu-item-vini">
+            <div class="menu-item-name">Sartarelli Passito</div>
+            <div class="menu-item-producer">Sartarelli</div>
+            <div class="menu-item-price"></div>
           </div>
         </div>
       </div>
